@@ -1,0 +1,14 @@
+# Ignore installer script
+kanban-lookup_install.cmd
+
+# Ignore local releases folder
+releases/
+
+# Ignore zip files (optional but recommended)
+*.zip
+
+# Ignore temporary / system files
+*.log
+*.tmp
+Thumbs.db
+.DS_Store
