@@ -1,9 +1,8 @@
 ﻿#Requires AutoHotkey v2.0
 #SingleInstance Force
 
-VERSION := "1.0.0"
+VERSION := "1.0.1"
 
-; Alt+K = Open picture from Kanban catalogue
 !k:: {
     ClipSaved := A_Clipboard
     A_Clipboard := ""
@@ -18,7 +17,8 @@ VERSION := "1.0.0"
     A_Clipboard := ClipSaved
 
     ; Strip whitespace + quotes from front and back
-    sel := Trim(sel, " `t`r`n""'")
+    trimChars := " `t`r`n" . Chr(34) . "'"
+    sel := Trim(sel, trimChars)
 
     if (sel = "") {
         TrayTip "Kanban Lookup", "No usable text selected.", 2
@@ -27,9 +27,7 @@ VERSION := "1.0.0"
 
     catalog := "O:\_PRODUCTION\LOGISTICS\SUPPLY ORDER SYSTEM\FOTO z katalogů_s duplikáty"
 
-    ; Try multiple extensions
     extensions := [".jpg", ".png", ".jpeg"]
-
     for ext in extensions {
         targetFile := catalog "\" sel ext
         if FileExist(targetFile) {
