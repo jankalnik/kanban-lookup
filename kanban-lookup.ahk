@@ -2,7 +2,6 @@
 #SingleInstance Force
 
 VERSION := "1.0.0"
-A_IconTip := "Kanban Lookup v" VERSION
 
 ; Alt+K = Open picture from Kanban catalogue
 !k:: {
@@ -14,11 +13,11 @@ A_IconTip := "Kanban Lookup v" VERSION
         TrayTip "Kanban Lookup", "No text selected.", 2
         return
     }
+
     sel := A_Clipboard
     A_Clipboard := ClipSaved
 
     ; Strip whitespace + quotes from front and back
-    ; Includes: space, tab, CR/LF, double-quote, single-quote
     sel := Trim(sel, " `t`r`n""'")
 
     if (sel = "") {
@@ -28,14 +27,14 @@ A_IconTip := "Kanban Lookup v" VERSION
 
     catalog := "O:\_PRODUCTION\LOGISTICS\SUPPLY ORDER SYSTEM\FOTO z katalogů_s duplikáty"
 
-    ; Try multiple extensions (keep only ".jpg" if you want)
+    ; Try multiple extensions
     extensions := [".jpg", ".png", ".jpeg"]
 
     for ext in extensions {
         targetFile := catalog "\" sel ext
         if FileExist(targetFile) {
             Run targetFile
-            return  ; no popup when found/opened
+            return
         }
     }
 
