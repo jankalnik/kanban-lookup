@@ -1,7 +1,7 @@
 ﻿#Requires AutoHotkey v2.0
 #SingleInstance Force
 
-VERSION := "1.0.1"
+VERSION := "1.0.2"
 
 !k:: {
     ClipSaved := A_Clipboard
@@ -9,7 +9,7 @@ VERSION := "1.0.1"
     Send("^c")
     if !ClipWait(1) {
         A_Clipboard := ClipSaved
-        TrayTip "Kanban Lookup", "No text selected.", 2
+        TrayTip "Kanban Lookup", "No text selected.", 1
         return
     }
 
@@ -21,7 +21,7 @@ VERSION := "1.0.1"
     sel := Trim(sel, trimChars)
 
     if (sel = "") {
-        TrayTip "Kanban Lookup", "No usable text selected.", 2
+        TrayTip "Kanban Lookup", "No usable text selected.", 1
         return
     }
 
@@ -36,5 +36,5 @@ VERSION := "1.0.1"
         }
     }
 
-    TrayTip "Kanban Lookup", "Selected PN is not in kanban catalogue", 2
+    TrayTip "Kanban Lookup", "Selected PN is not in kanban catalogue", 1
 }
